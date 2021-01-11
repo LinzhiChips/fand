@@ -1,0 +1,12 @@
+Resource allocation
+-------------------
+
+PWM:
+	Input clock	CPU_1x
+	Timers		TTC0CLK0, TTC1CLK0
+	PWM outputs	EMIOTTC0WAVEO0, EMIOTTC1WAVEO0
+
+Tacho:
+	Input clocks	EMIOTTC0CLKI1, EMIOTTC1CLKI1
+	Timers		TTC0CLK1, TTC1CLK1
+	Outputs		-
