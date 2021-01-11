@@ -1,3 +1,12 @@
+/*
+ * fand.c - Daemon that controls fans and monitors their performance
+ *
+ * Copyright (C) 2021 Linzhi Ltd.
+ *
+ * This work is licensed under the terms of the MIT License.
+ * A copy of the license can be found in the file COPYING.txt
+ */
+
 #define _GNU_SOURCE	/* for asprintf */
 #include <stdbool.h>
 #include <stdlib.h>
