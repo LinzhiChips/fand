@@ -82,6 +82,10 @@
 #define	MQTT_TOPIC_R_1_RPM	"/fan/rear/1/rpm"
 #define	MQTT_TOPIC_R_2_RPM	"/fan/rear/2/rpm"
 
+/* all generations */
+
+#define	MQTT_TOPIC_ALL_PWM_SET	"/fan/all/pwm-set"
+
 
 enum mqtt_qos {
 	qos_be		= 0,
@@ -241,6 +245,9 @@ static void cb(struct mosquitto *mosq, void *obj,
 	} else if (!strcmp(msg->topic, MQTT_TOPIC_RE_PWM_SET)) {
 		/* rear in LC001.05 */
 		parse_pwm(mosq, 1, msg->payload, msg->payloadlen);
+	} else if (!strcmp(msg->topic, MQTT_TOPIC_ALL_PWM_SET)) {
+		parse_pwm(mosq, 0, msg->payload, msg->payloadlen);
+		parse_pwm(mosq, 1, msg->payload, msg->payloadlen);
 	} else {
 		fprintf(stderr, "unrecognized topic \"%s\"\n", msg->topic);
 	}
@@ -283,6 +290,11 @@ static struct mosquitto *setup_mqtt(void)
 		exit(1);
 	}
 	res = mosquitto_subscribe(mosq, NULL, MQTT_TOPIC_RE_PWM_SET, qos_ack);
+	if (res) {
+		fprintf(stderr, "mosquitto_subscribe: %d\n", res);
+		exit(1);
+	}
+	res = mosquitto_subscribe(mosq, NULL, MQTT_TOPIC_ALL_PWM_SET, qos_ack);
 	if (res) {
 		fprintf(stderr, "mosquitto_subscribe: %d\n", res);
 		exit(1);
