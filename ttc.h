@@ -1,7 +1,7 @@
 /*
  * ttc.h - Zynq Triple Timer Counter
  *
- * Copyright (C) 2021 Linzhi Ltd.
+ * Copyright (C) 2021, 2023 Linzhi Ltd.
  *
  * This work is licensed under the terms of the MIT License.
  * A copy of the license can be found in the file COPYING.txt
@@ -88,7 +88,8 @@
 #define	TTC_EV_REG(ttc, t) \
 	(*(volatile uint32_t *) (ttc_base + 0x78 + (ttc) * 0x1000 + (t) * 4))
 
-volatile void *ttc_base;
+
+extern volatile void *ttc_base;
 
 
 void ttc_open(void);
